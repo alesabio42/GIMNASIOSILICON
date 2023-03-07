@@ -1,65 +1,10 @@
 const API_URL ='http://localhost:3300'
 
-export async function getCursos() {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const requestOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    try {
-      const response = await fetch(`${API_URL}/cursos`, requestOptions);
-      const data = await response.json(); // Await la respuesta de la promesa
-      return data;
-    } catch(error) {
-      console.log('Nuestro error', error);
-    }
-  }
 
 
-export async function getCursoById(id_curso){
-    try{
-        const response = await fetch(`${API_URL}/cursos/${id_curso}`);
-        const data = await response.json();
-        return data[0];
-    }catch(error){
-        console.log('Nuestro error', error);
-    }
-}
 
-export function UpdateCurso(id_curso, nombre_curso){
-    const requestOptions={
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nombre_curso)
-    };
-    fetch(`${API_URL}/cursos/${id_curso}`, requestOptions)
-    
-}
 
-export async function getUsuarios(){
-    const token = JSON.parse(localStorage.getItem('token'));
-    
-    const requestOptions = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      
-    try{
-        const response = await fetch(`${API_URL}/usuarios`, requestOptions);
-        const data = await response.json();
-        return data;
-    }catch(error){
-        console.log('Nuestro error', error);
-    }
-}
-
-// traer los alumnos
+// TRAE LOS ALUMNOS 
 export async function getAlumnos(){
     const token = JSON.parse(localStorage.getItem('token'));
     
@@ -80,7 +25,7 @@ export async function getAlumnos(){
 
     
 
-
+// BUSCADOR DE ALUMNOS
 export async function BuscarAlumnos(filtros){
     const requestOptions={
         method: 'POST',
@@ -94,19 +39,8 @@ export async function BuscarAlumnos(filtros){
         return data;
 }
     
-export function SaveCurso(datos){
-    const requestOptions={
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datos)
-    };
-    fetch(`${API_URL}/cursos`, requestOptions)
-    
-}
 
-    
+// GUARDAR ALUMNO
 export function SaveAlumno(datos){
     const requestOptions={
         method: 'POST',
@@ -119,7 +53,7 @@ export function SaveAlumno(datos){
     
 }
 
-
+// LOGIN
 export async function Login(datos){
     const requestOptions={
         method: 'POST',
@@ -139,6 +73,7 @@ export async function Login(datos){
     }
 }
 
+// REGISTRO
 export async function Registro(datos){
     const requestOptions={
         method: 'POST',
@@ -156,6 +91,32 @@ export async function Registro(datos){
         // console.log('no funciona')
     }
 }
+
+
+
+//---------------------------------------------------USUARIOS---------------------------------------------------------------
+//---------------------------------------------------USUARIOS---------------------------------------------------------------
+//---------------------------------------------------USUARIOS---------------------------------------------------------------
+
+export async function getUsuarios(){
+    const token = JSON.parse(localStorage.getItem('token'));
+    
+    const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      
+    try{
+        const response = await fetch(`${API_URL}/usuarios`, requestOptions);
+        const data = await response.json();
+        return data;
+    }catch(error){
+        console.log('Nuestro error', error);
+    }
+}
+
 
 export async function BajaUsuario(id_usuario){
     const requestOptions={
@@ -194,39 +155,10 @@ export async function AltaUsuario(id_usuario){
     }
 }
 
-export async function BajaCurso(id_curso){
-    const requestOptions={
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    };
-    try{
-        const response = await fetch(`${API_URL}/bajacurso/${id_curso}`, requestOptions)
-        const data = await response.json();
-        return data;
-    } catch(e){
 
-        alert('No se puede conectar con el servidor')
-    }
-}
-
-export async function AltaCurso(id_curso){
-    const requestOptions={
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-    try{
-        const response = await fetch(`${API_URL}/altacurso/${id_curso}`, requestOptions)
-        const data = await response.json();
-        return data;
-    } catch(e){
-
-        alert('No se puede conectar con el servidor')
-    }
-}
+//---------------------------------------------------ALUMNOS---------------------------------------------------------------
+//---------------------------------------------------ALUMNOS---------------------------------------------------------------
+//---------------------------------------------------ALUMNOS---------------------------------------------------------------
 
 export async function CambioEstadoAlumno(id_alumno, datos){
     const requestOptions={
@@ -295,7 +227,7 @@ export async function getAlumnos_clase(){
 
 
 
-// ------------------------------------------------------PESOSS---------------------------------------------------------------------
+// ------------------------------------------------------PESOS---------------------------------------------------------------------
 // ------------------------------------------------------PESOS---------------------------------------------------------------------
 // ------------------------------------------------------PESOS---------------------------------------------------------------------
 // -----------------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE PESOS------------------------------------

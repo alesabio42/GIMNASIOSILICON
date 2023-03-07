@@ -20,14 +20,10 @@ export function Calculoimc() {
     <>
 
 <body>
-    <div class="intro">
-      <h1>CALCULADORA DE IMC</h1>
-      <p>El índice de masa corporal (IMC) es un número que se calcula con base en el peso y la estatura de la persona. Para la mayoría de las personas, el IMC es un indicador confiable de la gordura y se usa para identificar las categorías de peso que pueden llevar a problemas de salud.</p>
-    </div>
-
     <div>
     <form className="form" onSubmit={calcularImc}>
-    <p class="heading">INGRESAR VALORES</p>
+    <p class="heading">CALCULADORA IMC</p>
+    <p class="">El índice de masa corporal (IMC) es un número que se calcula con base en el peso y la estatura de la persona. Para la mayoría de las personas, el IMC es un indicador confiable de la gordura y se usa para identificar las categorías de peso que pueden llevar a problemas de salud.</p>
       <input type="number" className="input" placeholder="PESO" value={peso} onChange={(event) => setPeso(event.target.value)} />
       <input type="number" className="input" placeholder="ALTURA EN METROS" value={altura} onChange={(event) => setAltura(event.target.value)} />
       <button type="submit" class="buttonimc">CALCULAR IMC</button>

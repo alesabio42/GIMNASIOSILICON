@@ -7,6 +7,8 @@ import { Registro } from './componentes/login/Registro'
 //--------------MENU-----------------
 import { Menu } from './componentes/panel/Menu'
 
+
+//--------------USUARIOS-----------------
 import { ListUsuarios } from './componentes/usuarios/ListUsuarios'
 
 
@@ -24,6 +26,7 @@ import {Alumnos_clase} from './componentes/turnos/Alumnos_clase'
 
 //--------------INICIO-----------------
 import {Inicio} from './componentes/inicio/Inicio' 
+import {Contacto} from './componentes/inicio/Contacto' 
 
 //--------------SALUD-----------------
 
@@ -89,6 +92,7 @@ function App() {
          <Menu/> 
          <Routes>
             <Route path='/Inicio' element={<Inicio/>}></Route>
+            <Route path='/contacto' element={<Contacto/>}></Route>
 
 {/* ALUMNOS */}
             <Route path='/alumnos' element={<Alumnos/>} ></Route>
