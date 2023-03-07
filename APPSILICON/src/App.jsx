@@ -1,9 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-//--------------ALUMNOS-----------------
-import { Alumnos } from './componentes/alumnos/Alumnos'
-import { Inscribirse } from './componentes/alumnos/Inscribirse'
-import { EditarAlumno } from './componentes/alumnos/EditarAlumno'
+
 //--------------LOGIN-----------------
 import { Login } from './componentes/login/Login'
 import { Registro } from './componentes/login/Registro'
@@ -15,6 +12,12 @@ import { ListUsuarios } from './componentes/usuarios/ListUsuarios'
 
 //--------------HOME-----------------
 import {Home} from './componentes/home/Home.jsx'
+
+
+//--------------ALUMNOS-----------------
+import { Alumnos } from './componentes/alumnos/Alumnos'
+import { Inscribirse } from './componentes/alumnos/Inscribirse'
+import { EditarAlumno } from './componentes/alumnos/EditarAlumno'
 
 //--------------TURNOS-----------------
 import {Alumnos_clase} from './componentes/turnos/Alumnos_clase' 
@@ -38,9 +41,9 @@ import {EditarImc} from './componentes/salud/imc/EditarImc'
 
 
 //3- RM-----------------
-// import {Peso} from './componentes/salud/Peso'
-// import {AgregarPeso} from './componentes/salud/AgregarPeso'
-// import {EditarPeso} from './componentes/salud/EditarPeso'
+import {Rm} from './componentes/salud/rm/Rm'
+import {AgregarRm} from './componentes/salud/rm/AgregarRm'
+import {EditarRm} from './componentes/salud/rm/EditarRm'
 
 
 
@@ -86,15 +89,22 @@ function App() {
          <Menu/> 
          <Routes>
             <Route path='/Inicio' element={<Inicio/>}></Route>
+
+{/* ALUMNOS */}
             <Route path='/alumnos' element={<Alumnos/>} ></Route>
             <Route path='/inscribirse' element={<Inscribirse/>} ></Route>
-            <Route path='/listar_usuarios' element={<ListUsuarios/>} ></Route>
             <Route path='/editar_alumno/:id_alumno' element={<EditarAlumno/>} ></Route>
+
+{/* USUARIOS */}
+            <Route path='/listar_usuarios' element={<ListUsuarios/>} ></Route>
+
+
+
+
+{/* TURNO */}
             <Route path='/alumnos_clase' element={<Alumnos_clase/>} ></Route>
-            <Route path='/calculoimc' element={<Calculoimc/>} ></Route>
-            <Route path='/peso' element={<Peso/>} ></Route>
-            <Route path='/agregar_peso' element={<AgregarPeso/>} ></Route>
-            <Route path='/editar_peso/:id' element={<EditarPeso/>} ></Route>
+
+{/* DICCIONARIO */}
             <Route path='/diccionario' element={<Diccionario/>} ></Route>
             <Route path='/termino' element={<CreaTermino/>} ></Route>
             <Route path='/movimientos' element={<CreaMovimientos/>} ></Route>
@@ -103,9 +113,21 @@ function App() {
             <Route path='/editar_movimiento/:id' element={<EditarMovimiento/>} ></Route>
             <Route path='/editar_material/:id' element={<EditarMateriales/>} ></Route>
 
+{/* PESO */}
+            <Route path='/peso' element={<Peso/>} ></Route>
+            <Route path='/agregar_peso' element={<AgregarPeso/>} ></Route>
+            <Route path='/editar_peso/:id' element={<EditarPeso/>} ></Route>
+
+{/* IMC */}
+            <Route path='/calculoimc' element={<Calculoimc/>} ></Route>
             <Route path='/imc' element={<Imc/>} ></Route>
             <Route path='/agregar_imc' element={<AgregarImc/>} ></Route>
             <Route path='/editar_imc/:id' element={<EditarImc/>} ></Route>
+{/* RM */}
+            <Route path='/rm' element={<Rm/>} ></Route>
+            <Route path='/agregar_rm' element={<AgregarRm/>} ></Route>
+            <Route path='/editar_rm/:id' element={<EditarRm/>} ></Route>
+
           </Routes>
         </div>
     }

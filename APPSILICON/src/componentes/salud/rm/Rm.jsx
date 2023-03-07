@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as API from '../../../servicios/servicios';
-import './Imc.css';
+import './Rm.css';
 import { Link } from 'react-router-dom';
 
-export function Imc() {
-  const [imc, setImc] = useState([]);
+export function Rm() {
+  const [rm, setRm] = useState([]);
   const [usuarioId, setUsuarioId] = useState('');
   const [mensajeSuccess, setMensajeSuccess] = useState('');
 
@@ -16,34 +16,34 @@ export function Imc() {
   }, []);
 
   useEffect(() => {
-    async function fetchImc() {
+    async function fetchRm() {
       if (usuarioId) {
-        const data = await API.getImcPorUsuarioId(usuarioId);
-        setImc(data);
+        const data = await API.getRmPorUsuarioId(usuarioId);
+        setRm(data);
       }
     }
-    fetchImc();
+    fetchRm();
   }, [usuarioId]);
 
   
-  // CODIGO PARA ELIMINAR EL IMC
-  const eliminarImc  = async(id)=>{
-    const  imc = await API.EliminarImc(id);
-    setMensajeSuccess('Se elimino el registro de imc')
+  // CODIGO PARA ELIMINAR EL RM
+  const eliminarRm  = async(id)=>{
+    const  rm = await API.EliminarRm(id);
+    setMensajeSuccess('SE ELIMINO EL REGISTRO RM')
     setTimeout(()=>{
         setMensajeSuccess('')
         window.location.reload(true)
 
     }, 2000)
 
-    if(imc.status){
-        setmensajeError(imc.mensaje)
+    if(rm.status){
+        setmensajeError(rm.mensaje)
         setTimeout(()=>{
             setmensajeError('')
             window.location.reload(true)
         }, 2000)
     }else{
-        setmensajeError(imc.mensaje)
+        setmensajeError(rm.mensaje)
         setTimeout(()=>{
             setmensajeError('')
         }, 4000)
@@ -54,11 +54,11 @@ export function Imc() {
   return (
     <>
     <div>
-      <h2 className="titulo bg-white text-center">HISTORIAL DE IMC DEL USUARIO</h2>
+      <h2 className="titulo bg-white text-center">HISTORIAL DE RM DEL USUARIO</h2>
     </div>
 
     <div className="text-center">
-      <Link name="" id="" className="btn btn-primary" to={'/agregar_imc'} role="button">NUEVO REGISTRO</Link>
+      <Link name="" id="" className="btn btn-primary" to={'/agregar_rm'} role="button">NUEVO REGISTRO</Link>
     </div>
        <div>
                {
@@ -68,26 +68,29 @@ export function Imc() {
                     </div>:''
                 }
       </div>
-      <div className="imc-container">
+      <div className="rm-container">
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>IMC</th>
+            <th>CONCEPTO</th>
+            <th>RM</th>
             <th>Fecha</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {imc.map((imc) => (
-            <tr key={imc.id}>
-              <td>{imc.imc} kg</td>
-              <td>{new Date(imc.fecha).toLocaleDateString('es-AR')}</td>
+          {rm.map((rm) => (
+            <tr key={rm.id}>
+              <td>{rm.concepto}</td>
+              <td>{rm.rm}</td>
+
+              <td>{new Date(rm.fecha).toLocaleDateString('es-AR')}</td>
               <td>
                 <div className="d-flex">
                   <button type="button" className="btn btn-warning">
-                    <Link to={`/editar_imc/${imc.id}`} className="text-white text-decoration-none">Editar</Link>
+                    <Link to={`/editar_rm/${rm.id}`} className="text-white text-decoration-none">Editar</Link>
                   </button>
-                  <button onClick={() => eliminarImc(imc.id)} type="button" className="btn btn-danger">ELIMINAR</button>
+                  <button onClick={() => eliminarRm(rm.id)} type="button" className="btn btn-danger">ELIMINAR</button>
 
                 </div>
               </td>

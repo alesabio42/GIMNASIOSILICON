@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import * as API from '../../../servicios/servicios'
 
-export function EditarImc(){
+export function EditarRm(){
     const {id} = useParams();
     const [mensajeError, setMensajeError] = useState('')
     const [mensajeSuccess, setmensajeSuccess] = useState('')
-    const [imc, setImc] = useState('');
+    const [concepto, setConcepto] = useState('');
+    const [rm, setRm] = useState('');
     const [fecha, setFecha] = useState('');
 
     useEffect(()=>{
@@ -15,16 +16,17 @@ export function EditarImc(){
 
 
     const trae_datos  = async ()=>{
-        const datos_imc = await API.getImcById(id)
-        console.log(datos_imc);
-        setImc(datos_imc.imc)
-        setFecha(datos_imc.fecha_formateada)
+        const datos_rm = await API.getRmById(id)
+        console.log(datos_rm);
+        setConcepto(datos_rm.concepto)
+        setRm(datos_rm.rm)
+        setFecha(datos_rm.fecha_formateada)
     }
 
 
 
     const validarCampos = () => {
-        if (imc === '' || fecha === '') {
+        if ( concepto === '' || rm === '' || fecha === '') {
             setMensajeError('Por favor, complete los campos obligatorios')
             setTimeout(()=>{
                 setMensajeError('')
@@ -35,19 +37,20 @@ export function EditarImc(){
         }
     }
 
-    const editar_imc = ()=>{
+    const editar_rm = ()=>{
         if (!validarCampos()) {
             return
         }
         const datos_enviar={
-            imc: imc,
+            concepto: concepto,
+            rm: rm,
             fecha: fecha,
         };
-        API.UpdateImc(id,datos_enviar);
-        setmensajeSuccess('SE EDITO EL IMC')
+        API.UpdateRm(id,datos_enviar);
+        setmensajeSuccess('SE EDITO EL RM')
         setTimeout(()=>{
             setmensajeSuccess('')
-            window.location.href = '/imc';
+            window.location.href = '/rm';
         }, 2000)
     }
 
@@ -55,7 +58,7 @@ export function EditarImc(){
     return (
         <div className="card">
             <div className="card-header">
-                EDITAR REGISTRO DE IMC
+                EDITAR REGISTRO DE RM
             </div>
             {
                 mensajeError?
@@ -74,11 +77,21 @@ export function EditarImc(){
                 <div className='row'>
 
                 <div className="form-group col-4" >
-                  <label for="">IMC</label>
+                  <label for="">CONCEPTO</label>
                   <input 
                   type="text"
-                   value={imc} 
-                   onChange={(event)=>setImc(event.target.value)}
+                   value={concepto} 
+                   onChange={(event)=>setConcepto(event.target.value)}
+                  name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
+                  <small id="helpId" className="text-muted">&nbsp;</small>
+                </div>
+
+                <div className="form-group col-4" >
+                  <label for="">RM</label>
+                  <input 
+                  type="text"
+                   value={rm} 
+                   onChange={(event)=>setRm(event.target.value)}
                   name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
                   <small id="helpId" className="text-muted">&nbsp;</small>
                 </div>
@@ -96,8 +109,8 @@ export function EditarImc(){
 
                 {/* BOTONES PARA EDITAR O VOLVER AL LISTADO */}                
                 <div className="form-group">
-                    <button  onClick={editar_imc}  type="button" className="btn btn-primary">Editar</button>
-                    <Link to={'/imc'}><button type="button" className="btn btn-secondary">Volver al listado</button></Link>
+                    <button  onClick={editar_rm}  type="button" className="btn btn-primary">EDITAR</button>
+                    <Link to={'/rm'}><button type="button" className="btn btn-secondary">VOLVER AL LISTADO</button></Link>
                 </div>
             </div>
 

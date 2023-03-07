@@ -10,7 +10,7 @@ export function Menu(){
     const logout  = async (event)=>{
             setUsuario('')
             window.localStorage.removeItem('usuario')
-            window.location.reload(true);
+            window.location.href = '/';
     }
     useEffect(()=>{
       const usuarioLogueado = JSON.parse(localStorage.getItem('usuario'))
@@ -77,6 +77,7 @@ export function Menu(){
                     <Link className="dropdown-item" to={'/calculoimc'}>CALCULAR IMC</Link>
                     <Link className="dropdown-item" to={'/peso'}>REGISTRO PESO</Link>
                     <Link className="dropdown-item" to={'/imc'}>REGISTRO IMC</Link>
+                    <Link className="dropdown-item" to={'/rm'}>REGISTRO RM</Link>
                   </div>
                 </li>
 

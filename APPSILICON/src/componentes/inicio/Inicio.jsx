@@ -32,7 +32,7 @@ export function Inicio () {
               <div className="card-header" id="headingUno">
                 <h2 className="mb-0">
                   <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto1" aria-expanded="true" aria-controls="texto1">
-                    FUNCIONAL
+                  ¿QUE ES FUNCIONAL?
                   </buttoninicio>
                 </h2>
               </div>
@@ -155,12 +155,12 @@ export function Inicio () {
         <div className="card">
           <div className="card-header" id="headingUno2">
             <h2 className="mb-0">
-              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto4" aria-expanded="true" aria-controls="texto4">
+              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto10" aria-expanded="true" aria-controls="texto10">
                   ¿QUE ES MUSCULACION?
               </buttoninicio>
             </h2>
           </div>
-          <div id="texto4" className="collapse" aria-labelledby="headingUno2" data-parent="#accordionEjemplo2">
+          <div id="texto10" className="collapse" aria-labelledby="headingUno2" data-parent="#accordionEjemplo10">
             <div className="card-body">
                 <p> <strong>La musculación </strong>es una actividad orientada a la tonificación y desarrollo muscular, mediante el uso de máquinas y pesas. Se consigue:</p>
                     <ul>
@@ -176,12 +176,12 @@ export function Inicio () {
         <div className="card">
           <div className="card-header" id="headingDos2">
             <h2 className="mb-0">
-              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto5" aria-expanded="false" aria-controls="texto5">
+              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto124" aria-expanded="false" aria-controls="texto124">
                     DIAS Y HORARIOS
               </buttoninicio>
             </h2>
           </div>
-          <div id="texto5" className="collapse" aria-labelledby="headingDos2" data-parent="#accordionEjemplo2">
+          <div id="texto124" className="collapse" aria-labelledby="headingDos2" data-parent="#accordionEjemplo124">
             <div className="card-body">
                 <strong> Todos los días:</strong> de 8:00 AM a 9:00 PM
             </div>
@@ -190,12 +190,12 @@ export function Inicio () {
         <div className="card">
           <div className="card-header" id="headingTres2">
             <h2 className="mb-0">
-              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto6" aria-expanded="false" aria-controls="texto6">
+              <buttoninicio className="btn btn-link w-100 " type="buttoninicio" data-toggle="collapse" data-target="#texto134" aria-expanded="false" aria-controls="texto134">
                  PLANES
               </buttoninicio>
             </h2>
           </div>
-          <div id="texto6" className="collapse" aria-labelledby="headingTres2" data-parent="#accordionEjemplo2">
+          <div id="texto134" className="collapse" aria-labelledby="headingTres2" data-parent="#accordionEjemplo134">
             <div className="card-body">
                     <p class="m-0 p-0"><strong>1 MES: </strong> $5.000</p>
                     <p class="m-0 p-0"><strong>2 MESES: </strong> $9.000</p>
@@ -237,13 +237,13 @@ export function Inicio () {
         <div className="card">
           <div className="card-header" id="headingCinco2">
             <h2 className="mb-0">
-              <button className="btn btn-link w-100 " type="button" data-toggle="collapse" data-target="#texto5-2" aria-expanded="false" aria-controls="texto5-2">
+              <button className="btn btn-link w-100 " type="button" data-toggle="collapse" data-target="#texto136" aria-expanded="false" aria-controls="texto136">
                 DIAS Y HORARIOS
               </button>
             </h2>
           </div>
 
-          <div id="texto5-2" className="collapse" aria-labelledby="headingCinco2" data-parent="#accordionEjemplo2">
+          <div id="texto136" className="collapse" aria-labelledby="headingCinco2" data-parent="#accordionEjemplo136">
             <div className="card-body">
                 <strong>Martes y Jueves: </strong>8:00 AM, 9:00 AM, 10:00 AM Y 11:00 AM
             </div>

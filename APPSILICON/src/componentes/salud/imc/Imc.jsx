@@ -80,7 +80,7 @@ export function Imc() {
         <tbody>
           {imc.map((imc) => (
             <tr key={imc.id}>
-              <td>{imc.imc} kg</td>
+              <td>{imc.imc}</td>
               <td>{new Date(imc.fecha).toLocaleDateString('es-AR')}</td>
               <td>
                 <div className="d-flex">

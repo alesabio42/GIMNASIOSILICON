@@ -747,6 +747,123 @@ router.delete('/eliminarimc/:id', (req, res) => {
 });
 
 
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE RM--------------------------------
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE RM--------------------------------
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE RM--------------------------------
+// 1- OBTENER
+router.get('/rm/:usuario_id', verificarToken, (req, res)=>{
+    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            const usuario_id = req.params.usuario_id;
+            const query = `SELECT id, concepto, rm, fecha FROM registros_de_rm WHERE usuario_id = '${usuario_id}'`;
+
+            mysqlConeccion.query(query, (err, rows)=>{
+                if(!err){
+                    res.json(rows);
+                }else{
+                    console.log(err)
+                }
+            });
+        }
+    });
+});
+
+
+// 2- AGREGAR REGISTRO DE RM
+router.post('/registrorm', (req, res)=>{
+    const { usuario_id, concepto, rm, fecha } = req.body
+    
+            let query=`INSERT INTO registros_de_rm (usuario_id, concepto, rm, fecha) VALUES ('${usuario_id}','${concepto}','${rm}','${fecha}')`;
+            mysqlConeccion.query(query, (err, registros)=>{
+                if(!err){
+                    res.send('Se inserto correctamente nuestro registro');
+                }else{
+                    console.log(err)
+                    res.send('El error es: '+err);
+                }
+            })
+       
+    
+});
+
+
+//  2- EDITAR REGISTRO DE RM
+
+// X - OBTENER DATOS DEL ID RM A MODIFICAR
+
+router.get('/nrm/:id', (req, res)=>{
+    const  parametro  = req.params.id;
+    if(esNumero(parametro)){
+        res.json(
+            {
+                status: false,
+                mensaje:"El parametro que se espera tiene ser un numero entero"
+            });
+    }else{
+        mysqlConeccion.query('SELECT concepto, rm, DATE_FORMAT(fecha, "%Y-%m-%d") as fecha_formateada FROM registros_de_rm WHERE id = ?', [parametro], (err, rows)=>{
+            if(!err){
+                if(rows.length!=0){
+                    res.json(rows);
+                }else{
+                    res.json(
+                        {
+                            status: false,
+                            mensaje:"El ID del registro de rm no existe en la base de datos."
+                        });
+                }    
+            }else{
+                res.json(
+                {
+                    status: false,
+                    mensaje:"Error en el servidor."
+                });
+            }
+        }); 
+    }
+})
+
+
+// X - ENVIAR DATOS DEL ID RM MODIFICADO
+router.put('/rm/:id' , (req, res)=>{
+    //asigna a id el valor que recibe por el parametro 
+    let id  = req.params.id;
+    const { concepto, rm, fecha } =req.body  
+    console.log(req.body)
+    let query=`UPDATE registros_de_rm SET concepto='${concepto}', rm='${rm}', fecha='${fecha}' WHERE id='${id}'`;
+    mysqlConeccion.query(query, (err, registros)=>{
+        if(!err){
+            res.send('El Id que editamos es : '+id+'');
+        }else{
+            console.log(err)
+        }
+    })
+       
+});
+
+// 3- ELIMINAR REGISTRO DE RM
+router.delete('/eliminarrm/:id', (req, res) => {
+    const id = req.params.id;
+    let query = `DELETE FROM registros_de_rm WHERE id='${id}'`;
+    mysqlConeccion.query(query, (err, registros) => {
+        if(!err) {
+            res.status(200).json({ message: `El registro con id ${id} ha sido eliminado correctamente` });
+        } else {
+            console.error('Error al eliminar el registro: ', err);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
 // -----------------------------------------DICCIONARIO-------------------------------------------------------
 // -----------------------------------------DICCIONARIO-------------------------------------------------------
 // -----------------------------------------DICCIONARIO-------------------------------------------------------

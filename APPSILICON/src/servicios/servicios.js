@@ -376,7 +376,7 @@ export async function EliminarPeso(id) {
 // ------------------------------------------------------IMC---------------------------------------------------------------------
 // ------------------------------------------------------IMC---------------------------------------------------------------------
 // ------------------------------------------------------IMC---------------------------------------------------------------------
-// -----------------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE PESOS------------------------------------
+// -----------------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA IMC------------------------------------
 
 // 1- OBTENER
 export async function getImcPorUsuarioId(usuario_id) {
@@ -450,6 +450,82 @@ export async function EliminarImc(id) {
 }
 
 
+
+// ------------------------------------------------------RM---------------------------------------------------------------------
+// ------------------------------------------------------RM---------------------------------------------------------------------
+// ------------------------------------------------------RM---------------------------------------------------------------------
+// -----------------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA RM------------------------------------
+
+// 1- OBTENER
+export async function getRmPorUsuarioId(usuario_id) {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(`${API_URL}/rm/${usuario_id}`, requestOptions);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('Nuestro error', error);
+    }
+  }
+  
+// 2-AGREGAR REGISTRO DE RM
+  export function SaveRegistroRm(datos_rm){
+    const requestOptions={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos_rm)
+    };
+    fetch(`${API_URL}/registrorm`, requestOptions)
+    
+}
+
+// 3-EDITAR REGISTRO DE RM
+export async function getRmById(id){
+    try{
+        const response = await fetch(`${API_URL}/nrm/${id}`);
+        const data = await response.json();
+        return data[0];
+    }catch(error){
+        console.log('Nuestro error', error);
+    }
+}
+
+export function UpdateRm(id, datos_rm){
+    const requestOptions={
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos_rm)
+    };
+    fetch(`${API_URL}/rm/${id}`, requestOptions)
+    
+}
+
+// 4-ELIMINAR REGISTRO DE RM
+export async function EliminarRm(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    try {
+        const response = await fetch(`${API_URL}/eliminarrm/${id}`, requestOptions);
+        const data = await response.json();
+        return data;
+    } catch(e) {
+        alert('No se puede conectar con el servidor');
+    }
+}
 
 
 

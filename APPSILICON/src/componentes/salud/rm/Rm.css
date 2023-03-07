@@ -1,10 +1,10 @@
-.imc-container {
+.rm-container {
     display: flex;
     justify-content: center;
     background-color: #ffffff;
     padding: 1rem;
   }
-  .imc-header {
+  .rm-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
