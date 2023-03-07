@@ -76,6 +76,7 @@ export function Menu(){
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <Link className="dropdown-item" to={'/calculoimc'}>CALCULAR IMC</Link>
                     <Link className="dropdown-item" to={'/peso'}>REGISTRO PESO</Link>
+                    <Link className="dropdown-item" to={'/imc'}>REGISTRO IMC</Link>
                   </div>
                 </li>
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as API from '../../servicios/servicios'
+import * as API from '../../../servicios/servicios'
 
-export function AgregarPeso(){
+export function AgregarImc(){
     const [usuarioId, setUsuarioId] = useState('');
-    const [peso, setPeso] = useState('');
+    const [imc, setImc] = useState('');
     const [fecha, setFecha] = useState('');
     const [mensajeSuccess, setMensajeSuccess] = useState('');
   
@@ -16,25 +16,26 @@ export function AgregarPeso(){
   }, []);
 
 
-    const registro_peso = ()=>{
-        const datos_peso={
+    const registro_imc = ()=>{
+        const datos_imc={
             usuario_id: usuarioId,
-            peso: peso,
+            imc: imc,
             fecha: fecha,
 
         };
-        console.log(datos_peso)
-        API.SaveRegistroPeso(datos_peso);
-        setMensajeSuccess('Se agrego el registro de peso')
+        console.log(datos_imc)
+        API.SaveRegistroImc(datos_imc);
+        setMensajeSuccess('Se agrego el registro de imc')
             setTimeout(()=>{
                 setMensajeSuccess('')
+                window.location.href = '/imc';
             }, 2000)
     }
 
     return(
         <div className="card">
             <div className="card-header">
-                NUEVO REGISTRO DE PESO
+                NUEVO REGISTRO DE IMC
             </div>
             {
                 mensajeSuccess?
@@ -46,11 +47,11 @@ export function AgregarPeso(){
                 <div className='row'>
                     
                 <div className="form-group col-4" >
-                  <label for="">PESO</label>
+                  <label for="">IMC</label>
                   <input 
                   type="text"
-                   value={peso} 
-                   onChange={(event)=>setPeso(event.target.value)}
+                   value={imc} 
+                   onChange={(event)=>setImc(event.target.value)}
                   name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
                   <small id="helpId" className="text-muted">&nbsp;</small>
                 </div>
@@ -70,13 +71,10 @@ export function AgregarPeso(){
                 </div>
                 <div className="row">
                     <div className='col-3 mt-3'>
-                        <button  onClick={registro_peso}  type="button" className="btn btn-primary">Guardar</button>
-                        <Link to={'/peso'}><button type="button" className="btn btn-secondary">Volver al listado</button></Link>
+                        <button  onClick={registro_imc}  type="button" className="btn btn-primary">Guardar</button>
+                        <Link to={'/imc'}><button type="button" className="btn btn-secondary">Volver al listado</button></Link>
                     </div>
                 </div>
-            </div>
-            <div className="card-footer text-muted">
-               Silicon Misiones
             </div>
         </div>
     )

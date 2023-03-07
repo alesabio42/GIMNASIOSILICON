@@ -33,7 +33,7 @@ export function Inscribirse(){
         setmensajeSuccess('Se agrego el alumno');
         setTimeout(() => {
             setmensajeSuccess('');
-            window.location.href = '/listar_alumnos';
+            window.location.href = '/alumnos';
         }, 2000);
     }
 

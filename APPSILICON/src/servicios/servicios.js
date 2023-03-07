@@ -373,6 +373,92 @@ export async function EliminarPeso(id) {
 
 
 
+// ------------------------------------------------------IMC---------------------------------------------------------------------
+// ------------------------------------------------------IMC---------------------------------------------------------------------
+// ------------------------------------------------------IMC---------------------------------------------------------------------
+// -----------------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE PESOS------------------------------------
+
+// 1- OBTENER
+export async function getImcPorUsuarioId(usuario_id) {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(`${API_URL}/imc/${usuario_id}`, requestOptions);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('Nuestro error', error);
+    }
+  }
+  
+// 2-AGREGAR REGISTRO DE IMC
+  export function SaveRegistroImc(datos_imc){
+    const requestOptions={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos_imc)
+    };
+    fetch(`${API_URL}/registroimc`, requestOptions)
+    
+}
+
+// 3-EDITAR REGISTRO DE IMC
+export async function getImcById(id){
+    try{
+        const response = await fetch(`${API_URL}/nimc/${id}`);
+        const data = await response.json();
+        return data[0];
+    }catch(error){
+        console.log('Nuestro error', error);
+    }
+}
+
+export function UpdateImc(id, datos_imc){
+    const requestOptions={
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos_imc)
+    };
+    fetch(`${API_URL}/imc/${id}`, requestOptions)
+    
+}
+
+// 4-ELIMINAR REGISTRO DE IMC
+export async function EliminarImc(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    try {
+        const response = await fetch(`${API_URL}/eliminarimc/${id}`, requestOptions);
+        const data = await response.json();
+        return data;
+    } catch(e) {
+        alert('No se puede conectar con el servidor');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 // -----------------------------------------------------------DICCIONARIO-------------------------------------------------------
 // -----------------------------------------------------------DICCIONARIO-------------------------------------------------------
 // -----------------------------------------------------------DICCIONARIO-------------------------------------------------------

@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import * as API from '../../servicios/servicios'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import * as API from '../../../servicios/servicios'
 
-export function EditarPeso(){
-    const {id} = useParams();
-    const [mensajeSuccess, setmensajeSuccess] = useState('')
+export function AgregarPeso(){
+    const [usuarioId, setUsuarioId] = useState('');
     const [peso, setPeso] = useState('');
     const [fecha, setFecha] = useState('');
-
-    useEffect(()=>{
-        trae_datos(id)
-    },[])
-
-    const trae_datos  = async ()=>{
-        const datos_peso = await API.getPesoById(id)
-        console.log(datos_peso);
-        setPeso(datos_peso.peso)
-        setFecha(datos_peso.fecha_formateada)
+    const [mensajeSuccess, setMensajeSuccess] = useState('');
+  
+  useEffect(() => {
+    const usuarioLogueado = JSON.parse(localStorage.getItem('usuario'));
+    if (usuarioLogueado) {
+      setUsuarioId(usuarioLogueado.datos[0].id);
     }
-    const editar_peso = ()=>{
-        const datos_enviar={
+  }, []);
+
+
+    const registro_peso = ()=>{
+        const datos_peso={
+            usuario_id: usuarioId,
             peso: peso,
             fecha: fecha,
+
         };
-        API.UpdatePeso(id,datos_enviar);
-        setmensajeSuccess('Se Edito el peso')
+        console.log(datos_peso)
+        API.SaveRegistroPeso(datos_peso);
+        setMensajeSuccess('Se agrego el registro de peso')
             setTimeout(()=>{
-                setmensajeSuccess('')
+                setMensajeSuccess('')
+                window.location.href = '/peso';
             }, 2000)
     }
-    return (
+
+    return(
         <div className="card">
             <div className="card-header">
-                Edicion de los datos del alumno
+                NUEVO REGISTRO DE PESO
             </div>
             {
                 mensajeSuccess?
@@ -42,7 +45,7 @@ export function EditarPeso(){
             }
             <div className="card-body">
                 <div className='row'>
-
+                    
                 <div className="form-group col-4" >
                   <label for="">PESO</label>
                   <input 
@@ -52,8 +55,10 @@ export function EditarPeso(){
                   name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
                   <small id="helpId" className="text-muted">&nbsp;</small>
                 </div>
+
+
                 <div className="form-group col-4">
-                  <label for="">FECHA</label>
+                  <label for="">FECHA REGISTRO</label>
                   <input 
                   type="date"
                    value={fecha} 
@@ -61,16 +66,16 @@ export function EditarPeso(){
                   name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
                   <small id="helpId" className="text-muted">&nbsp;</small>
                 </div>
-                </div>
-                
 
-                {/* BOTONES PARA EDITAR O VOLVER AL LISTADO */}                
-                <div className="form-group">
-                    <button  onClick={editar_peso}  type="button" className="btn btn-primary">Editar</button>
-                    <Link to={'/peso'}><button type="button" className="btn btn-secondary">Volver al listado</button></Link>
+
+                </div>
+                <div className="row">
+                    <div className='col-3 mt-3'>
+                        <button  onClick={registro_peso}  type="button" className="btn btn-primary">Guardar</button>
+                        <Link to={'/peso'}><button type="button" className="btn btn-secondary">Volver al listado</button></Link>
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

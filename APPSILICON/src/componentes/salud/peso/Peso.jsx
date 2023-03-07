@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as API from '../../servicios/servicios';
+import * as API from '../../../servicios/servicios';
 import './Peso.css';
 import { Link } from 'react-router-dom';
 

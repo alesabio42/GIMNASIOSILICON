@@ -4,6 +4,7 @@ import * as API from '../../servicios/servicios'
 
 export function EditarAlumno(){
     const {id_alumno} = useParams();
+    const [mensajeError, setMensajeError] = useState('')
     const [mensajeSuccess, setmensajeSuccess] = useState('')
     const [apellido, setApellido] = useState('');
     const [nombre, setNombre] = useState('');
@@ -29,7 +30,25 @@ export function EditarAlumno(){
         setSexo(datos_alumno.sexo)
         setFechaN(datos_alumno.fecha_formateada)
     }
+
+    const validarCampos = () => {
+        if (nombre === '' || apellido === '') {
+            setMensajeError('Por favor, complete los campos obligatorios')
+            setTimeout(()=>{
+                setMensajeError('')
+            }, 2000)
+            return false
+        } else {
+            return true
+        }
+    }
+
+
+
     const editar_alumno = ()=>{
+        if (!validarCampos()) {
+            return
+        }
         const datos_enviar={
             nombre: nombre,
             apellido: apellido,
@@ -37,19 +56,27 @@ export function EditarAlumno(){
             clase: clase,
             sexo: sexo,
             estado_civil: estado_civil
+
         };
         API.UpdateAlumno(id_alumno,datos_enviar);
-        setmensajeSuccess('Se Edito el alumno')
+        setmensajeSuccess('SE EDITO EL ALUMNO')
             setTimeout(()=>{
                 setmensajeSuccess('')
-                window.location.href = '/listar_alumnos';
+                window.location.href = '/alumnos';
             }, 2000)
     }
+
     return (
         <div className="card">
             <div className="card-header">
                 EDITAR ALUMNO
             </div>
+            {
+                mensajeError?
+                <div className="alert alert-danger" role="alert">
+                    {mensajeError}
+                </div>:''
+            }
             {
                 mensajeSuccess?
                 <div className="alert alert-success" role="alert">
@@ -65,7 +92,7 @@ export function EditarAlumno(){
                   type="text"
                    value={nombre} 
                    onChange={(event)=>setNombre(event.target.value)}
-                  name="" id="" className="form-control" placeholder="" aria-describedby="helpId"/>
+                  name="" id="" className="form-control" placeholder="" aria-describedby="helpId"required/>
                   <small id="helpId" className="text-muted">&nbsp;</small>
                 </div>
                 <div className="form-group col-4">

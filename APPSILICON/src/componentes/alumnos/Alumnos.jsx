@@ -185,9 +185,6 @@ const limpiar_filtros = ()=>{
                         </tbody>
                 </table>
             </div>
-            <div className="card-footer text-muted">
-                Silicon Misiones
-            </div>
         </div>
     )
 }

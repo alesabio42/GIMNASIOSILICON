@@ -576,7 +576,7 @@ router.get('/peso/:id', (req, res)=>{
                 mensaje:"El parametro que se espera tiene ser un numero entero"
             });
     }else{
-        mysqlConeccion.query('SELECT peso, DATE_FORMAT(fecha, "%d-%m-%Y") as fecha_formateada FROM registros_de_peso WHERE id = ?', [parametro], (err, rows)=>{
+        mysqlConeccion.query('SELECT peso, DATE_FORMAT(fecha, "%Y-%m-%d") as fecha_formateada FROM registros_de_peso WHERE id = ?', [parametro], (err, rows)=>{
             if(!err){
                 if(rows.length!=0){
                     res.json(rows);
@@ -600,7 +600,7 @@ router.get('/peso/:id', (req, res)=>{
 
 
 // X - ENVIAR DATOS DEL ID PESO A MODIFICADO
-router.put('/alumnos/:id' , (req, res)=>{
+router.put('/peso/:id' , (req, res)=>{
     //asigna a id el valor que recibe por el parametro 
     let id  = req.params.id;
     const { peso, fecha } =req.body  
@@ -632,6 +632,119 @@ router.delete('/eliminarpeso/:id', (req, res) => {
 
 
 
+
+
+
+
+
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE IMC--------------------------------
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE IMC--------------------------------
+// -----------------------PARA OBTENER, MODIFICAR Y ELIMINAR DATOS DE LA TABLA DE IMC--------------------------------
+// 1- OBTENER
+router.get('/imc/:usuario_id', verificarToken, (req, res)=>{
+    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            const usuario_id = req.params.usuario_id;
+            const query = `SELECT id, imc, fecha FROM registros_de_imc WHERE usuario_id = '${usuario_id}'`;
+
+            mysqlConeccion.query(query, (err, rows)=>{
+                if(!err){
+                    res.json(rows);
+                }else{
+                    console.log(err)
+                }
+            });
+        }
+    });
+});
+
+
+// 2- AGREGAR REGISTRO DE IMC
+router.post('/registroimc', (req, res)=>{
+    const { usuario_id, imc, fecha } = req.body
+    
+            let query=`INSERT INTO registros_de_imc (usuario_id, imc, fecha) VALUES ('${usuario_id}','${imc}','${fecha}')`;
+            mysqlConeccion.query(query, (err, registros)=>{
+                if(!err){
+                    res.send('Se inserto correctamente nuestro registro');
+                }else{
+                    console.log(err)
+                    res.send('El error es: '+err);
+                }
+            })
+       
+    
+});
+
+
+//  2- EDITAR REGISTRO DE IMC
+
+// X - OBTENER DATOS DEL ID IMC A MODIFICAR
+
+router.get('/nimc/:id', (req, res)=>{
+    const  parametro  = req.params.id;
+    if(esNumero(parametro)){
+        res.json(
+            {
+                status: false,
+                mensaje:"El parametro que se espera tiene ser un numero entero"
+            });
+    }else{
+        mysqlConeccion.query('SELECT imc, DATE_FORMAT(fecha, "%Y-%m-%d") as fecha_formateada FROM registros_de_imc WHERE id = ?', [parametro], (err, rows)=>{
+            if(!err){
+                if(rows.length!=0){
+                    res.json(rows);
+                }else{
+                    res.json(
+                        {
+                            status: false,
+                            mensaje:"El ID del registro de imc no existe en la base de datos."
+                        });
+                }    
+            }else{
+                res.json(
+                {
+                    status: false,
+                    mensaje:"Error en el servidor."
+                });
+            }
+        }); 
+    }
+})
+
+
+// X - ENVIAR DATOS DEL ID IMC MODIFICADO
+router.put('/imc/:id' , (req, res)=>{
+    //asigna a id el valor que recibe por el parametro 
+    let id  = req.params.id;
+    const { imc, fecha } =req.body  
+    console.log(req.body)
+    let query=`UPDATE registros_de_imc SET imc='${imc}', fecha='${fecha}' WHERE id='${id}'`;
+    mysqlConeccion.query(query, (err, registros)=>{
+        if(!err){
+            res.send('El Id que editamos es : '+id+'');
+        }else{
+            console.log(err)
+        }
+    })
+       
+});
+
+// 3- ELIMINAR REGISTRO DE IMC
+router.delete('/eliminarimc/:id', (req, res) => {
+    const id = req.params.id;
+    let query = `DELETE FROM registros_de_imc WHERE id='${id}'`;
+    mysqlConeccion.query(query, (err, registros) => {
+        if(!err) {
+            res.status(200).json({ message: `El registro con id ${id} ha sido eliminado correctamente` });
+        } else {
+            console.error('Error al eliminar el registro: ', err);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    });
+});
 
 
 // -----------------------------------------DICCIONARIO-------------------------------------------------------
