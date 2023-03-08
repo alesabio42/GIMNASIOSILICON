@@ -1049,5 +1049,26 @@ router.delete('/eliminarmaterial/:id', (req, res) => {
 
 
 
+// -----------------------------------------CONSULTAS-------------------------------------------------------
+// -----------------------------------------CONSULTAR-------------------------------------------------------
+// -----------------------------------------CONSULTAS-------------------------------------------------------
+
+// 1- AGREGAR REGISTRO DE CONSULTAS
+router.post('/registroconsulas', (req, res)=>{
+    const { nombre, correo, asunto, mensaje} = req.body
+    
+            let query=`INSERT INTO registros_de_consultas (nombre, correo, asunto, mensaje) VALUES ('${nombre}','${correo}','${asunto}','${mensaje}')`;
+            mysqlConeccion.query(query, (err, registros)=>{
+                if(!err){
+                    res.send('Se inserto correctamente nuestro registro');
+                }else{
+                    console.log(err)
+                    res.send('El error es: '+err);
+                }
+            })
+       
+    
+});
+
 module.exports = router;
 

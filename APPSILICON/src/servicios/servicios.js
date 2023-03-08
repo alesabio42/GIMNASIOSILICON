@@ -704,3 +704,23 @@ export async function EliminarMaterial(id) {
         alert('No se puede conectar con el servidor');
     }
 }
+
+
+
+
+
+// -----------------------------------------------------------CONSULTAS---------------------------------------------------
+// -----------------------------------------------------------CONSULTAS---------------------------------------------------
+// -----------------------------------------------------------CONSULTAS---------------------------------------------------
+
+export function SaveRegistroConsultas(datos_rm){
+    const requestOptions={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos_rm)
+    };
+    fetch(`${API_URL}/registroconsulas`, requestOptions)
+    
+}
