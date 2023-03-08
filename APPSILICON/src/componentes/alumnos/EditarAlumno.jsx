@@ -13,6 +13,14 @@ export function EditarAlumno(){
     const [estado_civil, setEstadoCivil] = useState('');
     const [sexo, setSexo] = useState('');
     const [fecha_nacimiento, setFechaN] = useState('');
+    const [alumnos_clase, setAlumnos_clase] = useState ([]);
+
+
+
+    useEffect (() =>{
+        API.getAlumnos_clase().then(setAlumnos_clase)
+    },[])
+
 
     useEffect(()=>{
         trae_datos(id_alumno)
@@ -43,8 +51,6 @@ export function EditarAlumno(){
         }
     }
 
-
-
     const editar_alumno = ()=>{
         if (!validarCampos()) {
             return
@@ -55,7 +61,8 @@ export function EditarAlumno(){
             dni: dni,
             clase: clase,
             sexo: sexo,
-            estado_civil: estado_civil
+            estado_civil: estado_civil,
+            fecha_nacimiento: fecha_nacimiento,
 
         };
         API.UpdateAlumno(id_alumno,datos_enviar);
@@ -126,20 +133,15 @@ export function EditarAlumno(){
                 <div className="form-group col-4" >
                   <label for="">Clase</label>
 
-                  <select onChange={(event)=>setClase(event.target.value)} className='form-control'>
+                  <select onChange={(event) => setClase(event.target.value)} className='form-control'>
                         <option>{clase}</option>
-                        <option value='8 AM'>08:00</option>
-                        <option value='9 AM'>09:00</option>
-                        <option value='10 AM'>10:00</option>
-                        <option value='11 AM'>11:00</option>
-                        <option value='2 PM'>14:00</option>
-                        <option value='3 PM'>15:00</option>
-                        <option value='4 PM'>16:00</option>
-                        <option value='5 PM'>17:00</option>
-                        <option value='6 PM'>18:00</option>
-                        <option value='7 PM'>19:00</option>
-                        <option value='8 PM'>20:00</option>
-                        <option value='9 PM'>21:00</option>
+                        {alumnos_clase.map((clase) => {
+                            if (parseInt(clase.cantidad) < 5) {
+                            return (
+                                <option value={clase.nombre}>{clase.nombre}</option>
+                            )
+                            }
+                        })}
                     </select>
 
                 </div>

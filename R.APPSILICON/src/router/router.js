@@ -19,7 +19,7 @@ router.get('/', (req, res)=>{
 //--------------------------------------------------------ALUMNOS-----------------------------------------------------------
 // OBTENER ALUMNOS
 router.get('/alumnos', verificarToken, (req, res)=>{
-    // res.send('Listado de alumnos');
+
     jwt.verify(req.token, 'siliconKey', (error)=>{
         if(error){
             res.sendStatus(403);
@@ -146,7 +146,6 @@ router.post('/alumnos', (req, res)=>{
 
 // ELIMINAR REGISTRO DE UN ALUMNO
 router.delete('/alumnos/:id',verificarToken ,(req, res)=>{
-    //asigna a id_alumno el valor que recibe por el parametro 
     let id_alumno  = req.params.id; 
     jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
@@ -166,11 +165,10 @@ router.delete('/alumnos/:id',verificarToken ,(req, res)=>{
 
 // EDITAR UN ALUMNO EN PARTICULAR
 router.put('/alumnos/:id' , (req, res)=>{
-    //asigna a id_curso el valor que recibe por el parametro 
     let id_alumno  = req.params.id;
     const { apellido, nombre, dni , fecha_nacimiento, sexo, clase, estado_civil } =req.body  
     console.log(req.body)
-    let query=`UPDATE alumnos SET apellido='${apellido}', nombre='${nombre}', dni='${dni}', estado_civil='${estado_civil}', sexo='${sexo}', clase='${clase}', fecha_modificacion=NOW() WHERE id_alumno='${id_alumno}'`;
+    let query=`UPDATE alumnos SET apellido='${apellido}', nombre='${nombre}', dni='${dni}', fecha_nacimiento='${fecha_nacimiento}', estado_civil='${estado_civil}', sexo='${sexo}', clase='${clase}', fecha_modificacion=NOW() WHERE id_alumno='${id_alumno}'`;
     mysqlConeccion.query(query, (err, registros)=>{
         if(!err){
             res.send('El Id que editamos es : '+id_alumno+' y cambiamos muchos campos!!');
@@ -272,13 +270,10 @@ router.post('/registro', async(req, res)=>{
 });
 
 
-router.put('/resetpassword/:id', (req, res)=>{
-    // asigna a id_usuario el valor que recibe por el parametro 
+router.put('/resetpassword/:id', (req, res)=>{ 
      let id  = req.params.id;
-    // //asigna el valor que recibe  en el Body 
      const { password } =req.body 
      let hash = bcrypt.hashSync(password,10); 
-    //  generamos la query de modificacion del password
      let query=`UPDATE usuarios SET password='${hash}' WHERE id='${id}'`;
      mysqlConeccion.query(query, (err, registros)=>{
         if(!err){
@@ -293,7 +288,6 @@ router.put('/resetpassword/:id', (req, res)=>{
 
 // BAJA USUARIO
 router.put('/bajausuario/:id', (req, res)=>{
-    // asigna a id_usuario el valor que recibe por el parametro 
      let id  = req.params.id;
      let query=`UPDATE usuarios SET estado='B' WHERE id='${id}'`;
      mysqlConeccion.query(query, (err, registros)=>{
@@ -312,7 +306,6 @@ router.put('/bajausuario/:id', (req, res)=>{
 
 // ALTA USUARIO
 router.put('/altausuario/:id', (req, res)=>{
-    // asigna a id_usuario el valor que recibe por el parametro 
      let id  = req.params.id;
      let query=`UPDATE usuarios SET estado='A' WHERE id='${id}'`;
      mysqlConeccion.query(query, (err, registros)=>{
@@ -330,7 +323,7 @@ router.put('/altausuario/:id', (req, res)=>{
 
 
 function verificarToken(req, res, next){
-    // console.log('controlo lo que llega', req.headers)
+
     const BearerHeader= req.headers['authorization']
     if(typeof BearerHeader!=='undefined'){
         const bearerToken= BearerHeader.split(" ")[1]
@@ -338,7 +331,7 @@ function verificarToken(req, res, next){
         next();
     }else{
          res.send('Para consultar las apis debe estar autenticado.Gracias');
-        // console.log('Ocurrio un error')
+
     }
 }
 
@@ -456,7 +449,6 @@ router.get('/peso/:id', (req, res)=>{
 
 // X - ENVIAR DATOS DEL ID PESO A MODIFICADO
 router.put('/peso/:id' , (req, res)=>{
-    //asigna a id el valor que recibe por el parametro 
     let id  = req.params.id;
     const { peso, fecha } =req.body  
     console.log(req.body)
@@ -572,7 +564,6 @@ router.get('/nimc/:id', (req, res)=>{
 
 // X - ENVIAR DATOS DEL ID IMC MODIFICADO
 router.put('/imc/:id' , (req, res)=>{
-    //asigna a id el valor que recibe por el parametro 
     let id  = req.params.id;
     const { imc, fecha } =req.body  
     console.log(req.body)
@@ -682,7 +673,6 @@ router.get('/nrm/:id', (req, res)=>{
 
 // X - ENVIAR DATOS DEL ID RM MODIFICADO
 router.put('/rm/:id' , (req, res)=>{
-    //asigna a id el valor que recibe por el parametro 
     let id  = req.params.id;
     const { concepto, rm, fecha } =req.body  
     console.log(req.body)
@@ -806,7 +796,6 @@ router.get('/termino/:id', (req, res)=>{
 
 // X - ENVIAR DATOS DEL ID TERMINO A MODIFICADO
 router.put('/termino/:id' , (req, res)=>{
-    //asigna a id el valor que recibe por el parametro 
     let id  = req.params.id;
     const { concepto, definicion } =req.body  
     console.log(req.body)

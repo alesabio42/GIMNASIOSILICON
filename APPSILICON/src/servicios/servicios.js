@@ -4,55 +4,6 @@ const API_URL ='http://localhost:3300'
 
 
 
-// TRAE LOS ALUMNOS 
-export async function getAlumnos(){
-    const token = JSON.parse(localStorage.getItem('token'));
-    
-    const requestOptions = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-    try{
-        const response = await fetch(`${API_URL}/alumnos`, requestOptions);
-        const data = await response.json();
-        return data;
-    }catch(error){
-        console.log('Nuestro error', error);
-    }
-}
-
-    
-
-// BUSCADOR DE ALUMNOS
-export async function BuscarAlumnos(filtros){
-    const requestOptions={
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(filtros)
-    };
-    const response = await fetch(`${API_URL}/buscar_alumnos`, requestOptions)
-    const data = await response.json();
-        return data;
-}
-    
-
-// GUARDAR ALUMNO
-export function SaveAlumno(datos){
-    const requestOptions={
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datos)
-    };
-    fetch(`${API_URL}/alumnos`, requestOptions)
-    
-}
-
 // LOGIN
 export async function Login(datos){
     const requestOptions={
@@ -160,6 +111,57 @@ export async function AltaUsuario(id_usuario){
 //---------------------------------------------------ALUMNOS---------------------------------------------------------------
 //---------------------------------------------------ALUMNOS---------------------------------------------------------------
 
+
+// TRAE LOS ALUMNOS 
+export async function getAlumnos(){
+    const token = JSON.parse(localStorage.getItem('token'));
+    
+    const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    try{
+        const response = await fetch(`${API_URL}/alumnos`, requestOptions);
+        const data = await response.json();
+        return data;
+    }catch(error){
+        console.log('Nuestro error', error);
+    }
+}
+
+    
+
+// BUSCADOR DE ALUMNOS
+export async function BuscarAlumnos(filtros){
+    const requestOptions={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(filtros)
+    };
+    const response = await fetch(`${API_URL}/buscar_alumnos`, requestOptions)
+    const data = await response.json();
+        return data;
+}
+    
+
+// GUARDAR ALUMNO
+export function SaveAlumno(datos){
+    const requestOptions={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos)
+    };
+    fetch(`${API_URL}/alumnos`, requestOptions)
+    
+}
+
+// CAMBIO ESTADO DEL ALUMNO
 export async function CambioEstadoAlumno(id_alumno, datos){
     const requestOptions={
         method: 'PUT',

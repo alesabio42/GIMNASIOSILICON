@@ -11,9 +11,10 @@ export function Inscribirse(){
     const [estado_civil, setEstadoCivil] = useState('');
     const [sexo, setSexo] = useState('');
     const [fecha_nacimiento, setFechaN] = useState('');
-    
     const [alumnos_clase, setAlumnos_clase] = useState ([]);
 
+
+    
     useEffect (() =>{
     API.getAlumnos_clase().then(setAlumnos_clase)
 },[])
