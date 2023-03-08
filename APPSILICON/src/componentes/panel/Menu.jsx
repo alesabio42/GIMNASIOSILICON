@@ -31,22 +31,22 @@ export function Menu(){
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav mx-5">
+              <ul className="navbar-nav mx-3">
 
                 {/* boton de INICIO */}
-                <li className="nav-item active mx-4">
+                <li className="nav-item active mx-3">
                   <Link className="nav-link" to={'/Inicio'}>INICIO</Link>
                 </li>
                 
 
                 {/* boton de TURNOS DISPONIBLES */}
-                <li className="nav-item active mx-4">
+                <li className="nav-item active mx-3">
                   <Link className="nav-link" to={'/alumnos_clase'}>TURNOS</Link>
                 </li>
 
 
                 {/* boton de ALUMNOS */}
-                <li className="nav-item dropdown mx-4">
+                <li className="nav-item dropdown mx-3">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ALUMNOS
                   </a>
@@ -58,7 +58,7 @@ export function Menu(){
 
 
                 { /* boton de USUARIOS */}
-                <li className="nav-item dropdown mx-4">
+                <li className="nav-item dropdown mx-3">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     USUARIOS
                   </a>
@@ -69,7 +69,7 @@ export function Menu(){
 
 
                 { /* boton de SALUD */}
-                <li className="nav-item dropdown mx-4">
+                <li className="nav-item dropdown mx-3">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     SALUD
                   </a>
@@ -83,13 +83,17 @@ export function Menu(){
 
 
                 { /* boton de DICCIONARIO */}
-                <li className="nav-item active mx-4">
+                <li className="nav-item active mx-3">
                   <Link className="nav-link" to={'/diccionario'}>DICCIONARIO</Link>
                 </li>
 
+                { /* boton de DICCIONARIO */}
+                <li className="nav-item active mx-3">
+                  <Link className="nav-link" to={'/contacto'}>CONTACTO</Link>
+                </li>
 
                 {/* BOTON PARA CERRAR SESION */}
-                <li className="nav-item dropdown mx-4">
+                <li className="nav-item dropdown mx-3">
                   <a className="nav-link dropdown-toggle" 
                   id="navbarDropdownMenuLink" 
                   data-toggle="dropdown" 

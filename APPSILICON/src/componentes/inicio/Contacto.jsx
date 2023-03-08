@@ -24,7 +24,6 @@ export function Contacto () {
 
 
   <div className="mapouter">
-
     <iframe
       id="gmap_canvas"
       src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5091.627810170975!2d-55.88916936937059!3d-27.36495945320065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1678232242757!5m2!1ses-419!2sar"

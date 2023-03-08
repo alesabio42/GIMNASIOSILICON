@@ -16,21 +16,25 @@ export function AgregarImc(){
   }, []);
 
 
-    const registro_imc = ()=>{
-        const datos_imc={
-            usuario_id: usuarioId,
-            imc: imc,
-            fecha: fecha,
-
-        };
-        console.log(datos_imc)
-        API.SaveRegistroImc(datos_imc);
-        setMensajeSuccess('Se agrego el registro de imc')
-            setTimeout(()=>{
-                setMensajeSuccess('')
-                window.location.href = '/imc';
-            }, 2000)
+  const registro_imc = ()=>{
+    if (!imc || !fecha) {
+        alert('Ingrese los datos requeridos');
+        return;
     }
+    const datos_imc={
+        usuario_id: usuarioId,
+        imc: imc,
+        fecha: fecha,
+
+    };
+    console.log(datos_imc)
+    API.SaveRegistroImc(datos_imc);
+    setMensajeSuccess('SE AGREGO EL REGISTRO DE IMC')
+        setTimeout(()=>{
+            setMensajeSuccess('')
+            window.location.href = '/imc';
+        }, 2000)
+}
 
     return(
         <div className="card">

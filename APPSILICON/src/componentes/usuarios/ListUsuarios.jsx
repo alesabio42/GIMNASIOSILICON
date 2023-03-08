@@ -71,10 +71,10 @@ export function ListUsuarios(){
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Apellido y Nombre</th>
-                            <th>Nombre de usuario</th>
-                            <th>Estado</th>
+                            <th>ID</th>
+                            <th>APELLIDO Y NOMBRE</th>
+                            <th>NOMBRE DE USUARIO</th>
+                            <th>ESTADO</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>

@@ -7,20 +7,26 @@ export function CreaMovimientos(){
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
     
-    const crear_movimientos = ()=>{
-        const datos_movimientos={
-            concepto: concepto,
-            definicion: definicion,
-
+    const crear_movimientos = () => {
+        if (!concepto || !definicion) {
+        alert('Ingrese los datos requeridos');
+          return;
+        }
+      
+        const datos_movimientos = {
+          concepto: concepto,
+          definicion: definicion,
         };
-        console.log(datos_movimientos)
+      
+        console.log(datos_movimientos);
         API.SaveMovimientos(datos_movimientos);
-        setmensajeSuccess('Se agrego el movimiento');
+        setmensajeSuccess('SE AGREGO EL MOVIMIENTO');
         setTimeout(() => {
-            setmensajeSuccess('');
-            window.location.href = '/diccionario';
+          setmensajeSuccess('');
+          window.location.href = '/diccionario';
         }, 2000);
-    }
+      };
+      
 
     return(
         <>

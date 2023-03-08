@@ -4,6 +4,7 @@ import * as API from '../../servicios/servicios'
 
 export function EditarMateriales(){
     const {id} = useParams();
+    const [mensajeError, setMensajeError] = useState('')
     const [mensajeSuccess, setmensajeSuccess] = useState('')
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
@@ -13,31 +14,55 @@ export function EditarMateriales(){
     },[])
 
     const trae_datos  = async ()=>{
-        // event.preventDefault();
         const datos_material = await API.getMaterialById(id)
         console.log(datos_material);
         setConcepto(datos_material.concepto)
         setDefinicion(datos_material.definicion)
 
     }
+
+    const validarCampos = () => {
+        if (concepto === '' || definicion === '') {
+            setMensajeError('Por favor, complete los campos obligatorios')
+            setTimeout(()=>{
+                setMensajeError('')
+            }, 2000)
+            return false
+        } else {
+            return true
+        }
+    }
+
+
     const editar_material = ()=>{
+        if (!validarCampos()) {
+            return
+        }
+        
         const datos_enviar={
             concepto: concepto,
             definicion: definicion,
  
         };
         API.UpdateMaterial(id,datos_enviar);
-        setmensajeSuccess('Se Edito el material')
+        setmensajeSuccess('SE EDITO EL MATERIAL')
             setTimeout(()=>{
                 setmensajeSuccess('')
                 window.location.href = '/diccionario';
             }, 2000)
     }
+
     return (
         <div className="card">
             <div className="card-header">
                 EDITAR MATERIAL
             </div>
+            {
+                mensajeError?
+                <div className="alert alert-danger" role="alert">
+                    {mensajeError}
+                </div>:''
+            }
             {
                 mensajeSuccess?
                 <div className="alert alert-success" role="alert">

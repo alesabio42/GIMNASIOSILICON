@@ -18,24 +18,30 @@ export function Inscribirse(){
     API.getAlumnos_clase().then(setAlumnos_clase)
 },[])
 
-    const crear_alumno = ()=>{
-        const datos_alumno={
-            nombre: nombre,
-            apellido: apellido,
-            dni: dni,
-            clase: clase,
-            sexo: sexo,
-            fecha_nacimiento: fecha_nacimiento,
-            estado_civil: estado_civil
-        };
-        console.log(datos_alumno)
-        API.SaveAlumno(datos_alumno);
-        setmensajeSuccess('Se agrego el alumno');
-        setTimeout(() => {
-            setmensajeSuccess('');
-            window.location.href = '/alumnos';
-        }, 2000);
+const crear_alumno = ()=>{
+    if (!nombre || !apellido || !dni || !clase || !sexo || !fecha_nacimiento) {
+        alert('Ingrese los datos requeridos');
+        return;
     }
+    
+    const datos_alumno={
+        nombre: nombre,
+        apellido: apellido,
+        dni: dni,
+        clase: clase,
+        sexo: sexo,
+        fecha_nacimiento: fecha_nacimiento,
+        estado_civil: estado_civil
+    };
+    console.log(datos_alumno)
+    API.SaveAlumno(datos_alumno);
+    setmensajeSuccess('Se agrego el alumno');
+    setTimeout(() => {
+        setmensajeSuccess('');
+        window.location.href = '/alumnos';
+    }, 2000);
+}
+
 
     return(
         <div className="card">

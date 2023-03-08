@@ -7,20 +7,24 @@ export function CreaMateriales(){
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
     
-    const crear_materiales = ()=>{
-        const datos_materiales={
-            concepto: concepto,
-            definicion: definicion,
-
+    const crear_materiales = () => {
+        if (!concepto || !definicion) {
+            alert('Ingrese los datos requeridos');
+          return;
+        }
+        const datos_materiales = {
+          concepto: concepto,
+          definicion: definicion,
         };
-        console.log(datos_materiales)
+      
+        console.log(datos_materiales);
         API.SaveMateriales(datos_materiales);
-        setmensajeSuccess('Se agrego el material');
+        setmensajeSuccess('SE AGREGO EL MATERIAL');
         setTimeout(() => {
-            setmensajeSuccess('');
-            window.location.href = '/diccionario';
+          setmensajeSuccess('');
+          window.location.href = '/diccionario';
         }, 2000);
-    }
+      };
 
     return(
         <>

@@ -17,22 +17,25 @@ export function AgregarRm(){
   }, []);
 
 
-    const registro_rm = ()=>{
-        const datos_rm={
-            usuario_id: usuarioId,
-            concepto: concepto,
-            rm: rm,
-            fecha: fecha,
-
-        };
-        console.log(datos_rm)
-        API.SaveRegistroRm(datos_rm);
-        setMensajeSuccess('SE AGREGO EL REGISTRO DE RM')
-            setTimeout(()=>{
-                setMensajeSuccess('')
-                window.location.href = '/rm';
-            }, 2000)
+const registro_rm = ()=>{
+    if (!concepto || !rm || !fecha) {
+        alert('Ingrese los datos requeridos');
+        return;
     }
+    const datos_rm={
+        usuario_id: usuarioId,
+        concepto: concepto,
+        rm: rm,
+        fecha: fecha,
+    };
+    console.log(datos_rm)
+    API.SaveRegistroRm(datos_rm);
+    setMensajeSuccess('SE AGREGO EL REGISTRO DE RM')
+    setTimeout(()=>{
+        setMensajeSuccess('')
+        window.location.href = '/rm';
+    }, 2000)
+}
 
     return(
         <div className="card">

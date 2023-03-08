@@ -4,6 +4,7 @@ import * as API from '../../servicios/servicios'
 
 export function EditarTermino(){
     const {id} = useParams();
+    const [mensajeError, setMensajeError] = useState('')
     const [mensajeSuccess, setmensajeSuccess] = useState('')
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
@@ -13,21 +14,36 @@ export function EditarTermino(){
     },[])
 
     const trae_datos  = async ()=>{
-        // event.preventDefault();
         const datos_termino = await API.getTerminoById(id)
         console.log(datos_termino);
         setConcepto(datos_termino.concepto)
         setDefinicion(datos_termino.definicion)
 
     }
+    const validarCampos = () => {
+    if (concepto === '' || definicion === '') {
+        setMensajeError('Por favor, complete los campos obligatorios')
+        setTimeout(()=>{
+            setMensajeError('')
+        }, 2000)
+        return false
+    } else {
+        return true
+    }
+}
+
     const editar_termino = ()=>{
+        if (!validarCampos()) {
+            return
+        }
+
         const datos_enviar={
             concepto: concepto,
             definicion: definicion,
  
         };
         API.UpdateTermino(id,datos_enviar);
-        setmensajeSuccess('Se Edito el alumno')
+        setmensajeSuccess('SE EDITO EL TERMINO')
             setTimeout(()=>{
                 setmensajeSuccess('')
                 window.location.href = '/diccionario';
@@ -38,6 +54,12 @@ export function EditarTermino(){
             <div className="card-header">
                 EDITAR TERMINO BASICO
             </div>
+            {
+                mensajeError?
+                <div className="alert alert-danger" role="alert">
+                    {mensajeError}
+                </div>:''
+            }
             {
                 mensajeSuccess?
                 <div className="alert alert-success" role="alert">

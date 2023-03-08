@@ -79,8 +79,8 @@
   
   .mapouter {
     width: 100%;
-    max-width: 50%;
-    min-height: 60vh;
+    min-height: 80vh;
+    display: flex;
   }
   
   .mapouter iframe {

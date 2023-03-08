@@ -22,7 +22,6 @@ export function EditarImc(){
     }
 
 
-
     const validarCampos = () => {
         if (imc === '' || fecha === '') {
             setMensajeError('Por favor, complete los campos obligatorios')

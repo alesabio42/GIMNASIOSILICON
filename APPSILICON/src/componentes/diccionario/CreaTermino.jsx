@@ -7,26 +7,32 @@ export function CreaTermino(){
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
     
-    const crear_termino = ()=>{
-        const datos_terminos={
-            concepto: concepto,
-            definicion: definicion,
-
+    const crear_termino = () => {
+        if (!concepto || !definicion) {
+            alert('Ingrese los datos requeridos');
+          return;
+        }
+      
+        const datos_terminos = {
+          concepto: concepto,
+          definicion: definicion,
         };
-        console.log(datos_terminos)
+      
+        console.log(datos_terminos);
         API.SaveTerminos(datos_terminos);
-        setmensajeSuccess('Se agrego el termino');
+        setmensajeSuccess('SE AGREGO EL TERMINO');
         setTimeout(() => {
-            setmensajeSuccess('');
-            window.location.href = '/diccionario';
+          setmensajeSuccess('');
+          window.location.href = '/diccionario';
         }, 2000);
-    }
+      };
+      
 
     return(
         <>
         <div className="card">
             <div className="card-header">
-                Edicion de los datos del alumno
+                AGREGAR NUEVO TERMINO:
             </div>
             {
                 mensajeSuccess?

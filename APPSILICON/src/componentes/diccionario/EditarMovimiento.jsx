@@ -4,6 +4,7 @@ import * as API from '../../servicios/servicios'
 
 export function EditarMovimiento(){
     const {id} = useParams();
+    const [mensajeError, setMensajeError] = useState('')
     const [mensajeSuccess, setmensajeSuccess] = useState('')
     const [concepto, setConcepto] = useState('');
     const [definicion, setDefinicion] = useState('');
@@ -13,21 +14,36 @@ export function EditarMovimiento(){
     },[])
 
     const trae_datos  = async ()=>{
-        // event.preventDefault();
         const datos_movimiento = await API.getMovimientoById(id)
         console.log(datos_movimiento);
         setConcepto(datos_movimiento.concepto)
         setDefinicion(datos_movimiento.definicion)
 
     }
+
+    const validarCampos = () => {
+        if (concepto === '' || definicion === '') {
+            setMensajeError('Por favor, complete los campos obligatorios')
+            setTimeout(()=>{
+                setMensajeError('')
+            }, 2000)
+            return false
+        } else {
+            return true
+        }
+    }
+
     const editar_movimiento = ()=>{
+        if (!validarCampos()) {
+            return
+        }
         const datos_enviar={
             concepto: concepto,
             definicion: definicion,
  
         };
         API.UpdateMovimiento(id,datos_enviar);
-        setmensajeSuccess('Se Edito el movimiento')
+        setmensajeSuccess('SE EDITO EL MOVIMIENTO')
             setTimeout(()=>{
                 setmensajeSuccess('')
                 window.location.href = '/diccionario';
@@ -38,6 +54,12 @@ export function EditarMovimiento(){
             <div className="card-header">
                 EDITAR MOVIMIENTO
             </div>
+            {
+                mensajeError?
+                <div className="alert alert-danger" role="alert">
+                    {mensajeError}
+                </div>:''
+            }
             {
                 mensajeSuccess?
                 <div className="alert alert-success" role="alert">

@@ -16,21 +16,26 @@ export function AgregarPeso(){
   }, []);
 
 
-    const registro_peso = ()=>{
-        const datos_peso={
-            usuario_id: usuarioId,
-            peso: peso,
-            fecha: fecha,
-
-        };
-        console.log(datos_peso)
-        API.SaveRegistroPeso(datos_peso);
-        setMensajeSuccess('Se agrego el registro de peso')
-            setTimeout(()=>{
-                setMensajeSuccess('')
-                window.location.href = '/peso';
-            }, 2000)
+  const registro_peso = ()=>{
+    if (!peso || !fecha) {
+        alert('Ingrese los datos requeridos');
+        return;
     }
+
+    const datos_peso={
+        usuario_id: usuarioId,
+        peso: peso,
+        fecha: fecha,
+    };
+
+    API.SaveRegistroPeso(datos_peso);
+    setMensajeSuccess('Se agrego el registro de peso');
+
+    setTimeout(()=>{
+        setMensajeSuccess('')
+        window.location.href = '/peso';
+    }, 2000)
+}
 
     return(
         <div className="card">
